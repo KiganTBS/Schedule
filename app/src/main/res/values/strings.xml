@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name" translatable="false">Schedule</string>
+    <string name="btn_enter">ENTER</string>
+    <string name="hint_email" translatable="false">Email:</string>
+    <string name="hint_password" translatable="false">Password:</string>
+    <string name="textview_log_in" translatable="false">Log in</string>
+    <string name="toast_loginError">EMAIL/PASSWORD NOT FOUND. TRY AGAIN</string>
+    <string name="title_activity_schedule">Schedule</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>
