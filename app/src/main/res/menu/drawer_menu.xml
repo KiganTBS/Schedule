@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_schedule"
+            android:icon="@drawable/ic_schedule"
+            android:title="@string/title_schedule" />
+        <item
+            android:id="@+id/nav_session"
+            android:icon="@drawable/ic_session"
+            android:title="@string/title_session" />
+        <item
+            android:id="@+id/nav_professor"
+            android:icon="@drawable/ic_professor"
+            android:title="@string/title_professors" />
+
+
+    </group>
+
+    <item android:title="@string/settings">
+        <menu>
+            <item
+                android:id="@+id/nav_change"
+                android:icon="@drawable/ic_change"
+                android:title="@string/title_change" />
+            <item
+                android:id="@+id/nav_add"
+                android:icon="@drawable/ic_add"
+                android:title="@string/title_add" />
+        </menu>
+    </item>
+
+</menu>

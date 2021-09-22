@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".Schedule"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true"/>
+        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">

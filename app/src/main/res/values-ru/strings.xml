@@ -2,4 +2,10 @@
 <resources>
     <string name="btn_enter">ВОЙТИ</string>
     <string name="toast_loginError">EMAIL/PASSWORD НЕ НАЙДЕНЫ. ПОПРОБУЙТЕ СНОВА</string>
+    <string name="title_schedule">Рассписание</string>
+    <string name="title_session">Сессия</string>
+    <string name="title_professors">Преподаватели</string>
+    <string name="title_change">Изменить</string>
+    <string name="title_add">Добавить</string>
+    <string name="settings">Настройки</string>
 </resources>
