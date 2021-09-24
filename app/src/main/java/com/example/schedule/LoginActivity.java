@@ -11,10 +11,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPass;
@@ -37,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "Logged", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, Schedule.class);
+                    Intent intent = new Intent(LoginActivity.this, Main.class);
                     startActivity(intent);
                 }
                 else
