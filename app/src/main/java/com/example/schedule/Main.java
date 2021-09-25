@@ -11,25 +11,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.material.navigation.NavigationBarItemView;
+import com.example.schedule.Scheule.ScheduleFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Рассписание");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
+       //  hideItem();
+
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,7 +78,11 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         return true;
     }
 
-
+    //Скрыть item
+    public void hideItem(){
+        Menu menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_add).setVisible(false);
+    }
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
