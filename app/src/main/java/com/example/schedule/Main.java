@@ -7,12 +7,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.example.schedule.Professor.ProfessorsFragment;
 import com.example.schedule.Scheule.ScheduleFragment;
+import com.example.schedule.Session.SessionFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +32,6 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Рассписание");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -46,6 +50,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                     new ScheduleFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_schedule);
         }
+
     }
 
 
@@ -92,4 +97,9 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
+    public void logOut(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+    }
 }

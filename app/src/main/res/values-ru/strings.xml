@@ -7,4 +7,5 @@
     <string name="title_professors">Преподаватели</string>
     <string name="title_change">Изменить</string>
     <string name="title_add">Добавить</string>
+    <string name="text_log_out">Выйти</string>
 </resources>

@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            Toast.makeText(LoginActivity.this, "Logged", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, Main.class);
             startActivity(intent);
         }
@@ -43,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Logged", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, Main.class);
                     startActivity(intent);
                 }
