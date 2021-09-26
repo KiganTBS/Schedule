@@ -13,21 +13,25 @@ import com.example.schedule.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
     private List<Schedule> schedules;
-    private LayoutInflater inflater;
 
-    public ScheduleAdapter(Context context, List<Schedule> schedules) {
+    public ScheduleAdapter() {
+        this.schedules = new ArrayList<>();
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
-        this.inflater = LayoutInflater.from(context);
+        notifyDataSetChanged();
     }
 
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_schedule,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_schedule, parent, false);
         return new ViewHolder(view);
     }
 

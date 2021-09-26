@@ -11,6 +11,9 @@ public class Session {
         this.professorExam = professorExam;
     }
 
+    public Session() {
+    }
+
     public String getDateExam() {
         return dateExam;
     }

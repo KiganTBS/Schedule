@@ -17,6 +17,8 @@ public class Schedule {
         this.nameProfessor = nameProfessor;
     }
 
+    public Schedule() {}
+
     public String getTimeBeginningLesson() {
         return timeBeginningLesson;
     }

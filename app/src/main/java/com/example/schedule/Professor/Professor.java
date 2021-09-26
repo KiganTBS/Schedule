@@ -9,6 +9,9 @@ public class Professor {
         this.nameSubject = nameSubject;
     }
 
+    public Professor() {
+    }
+
     public String getNameProfessor() {
         return nameProfessor;
     }

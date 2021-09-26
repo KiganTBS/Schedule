@@ -20,23 +20,33 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.schedule.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleFragment extends Fragment {
     ImageView imageViewDown, imageViewUp;
     Button buttonMon, buttonTue, buttonWed, buttonThu, buttonFri;
     Switch aSwitch;
-
-    ArrayList<Schedule> schedules = new ArrayList<Schedule>();
+    List<Schedule> schedules;
+    FirebaseFirestore db;
+    private ScheduleAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_schedule);
+        db = FirebaseFirestore.getInstance();
 
         imageViewDown = view.findViewById(R.id.imageViewUp);
         imageViewUp = view.findViewById(R.id.imageViewDown);
@@ -50,10 +60,11 @@ public class ScheduleFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSchedule);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ScheduleAdapter adapter = new ScheduleAdapter(getActivity(), schedules);
+        adapter = new ScheduleAdapter();
         recyclerView.setAdapter(adapter);
 
-        setInitData();
+
+        //setInitData();
 
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -92,5 +103,19 @@ public class ScheduleFragment extends Fragment {
                 "Компьютерные сети", "(Лекция)",
                 "Дистанционно", "Шевелев С.Н."));
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        db.collection("schedule").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                if(value !=null){
+                    schedules = value.toObjects(Schedule.class);
+                    adapter.setSchedules(schedules);
+                }
+            }
+        });
     }
 }
