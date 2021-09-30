@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.schedule.Professor.ProfessorsFragment;
-import com.example.schedule.Scheule.ScheduleFragment;
+import com.example.schedule.Schedule.ScheduleFragment;
 import com.example.schedule.Session.SessionFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +33,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Рассписание");
+        getSupportActionBar().setTitle("Расписание");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
        //  hideItem();

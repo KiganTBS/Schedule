@@ -4,16 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.schedule.R;
-import com.example.schedule.Scheule.Schedule;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -38,6 +34,7 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.View
         Professor professor = professors.get(position);
         holder.textViewNameProfessor.setText(professor.getNameProfessor());
         holder.textViewNameSubject.setText(professor.getNameSubject());
+        holder.textViewTypeOfSubject.setText(professor.getTypeOfSubject());
     }
 
     @Override
@@ -46,12 +43,13 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewNameProfessor, textViewNameSubject;
+        TextView textViewNameProfessor, textViewNameSubject, textViewTypeOfSubject;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNameProfessor = itemView.findViewById(R.id.textViewNameProfessor);
             textViewNameSubject = itemView.findViewById(R.id.textViewNameSubject);
+            textViewTypeOfSubject = itemView.findViewById(R.id.textViewTypeOfSubject);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.schedule.Scheule;
+package com.example.schedule.Schedule;
 
 public class Schedule {
     String timeBeginningLesson;

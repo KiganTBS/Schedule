@@ -1,6 +1,5 @@
-package com.example.schedule.Scheule;
+package com.example.schedule.Schedule;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

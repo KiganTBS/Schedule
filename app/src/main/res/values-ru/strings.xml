@@ -2,10 +2,37 @@
 <resources>
     <string name="btn_enter">ВОЙТИ</string>
     <string name="toast_loginError">EMAIL/PASSWORD НЕ НАЙДЕНЫ. ПОПРОБУЙТЕ СНОВА</string>
-    <string name="title_schedule">Рассписание</string>
+    <string name="title_schedule">Расписание</string>
     <string name="title_session">Сессия</string>
     <string name="title_professors">Преподаватели</string>
     <string name="title_change">Изменить</string>
     <string name="title_add">Добавить</string>
     <string name="text_log_out">Выйти</string>
+    <string name="text_name">Название:</string>
+    <string name="cab_dist">Кабинет / Дистант</string>
+    <string name="time">Время:</string>
+    <string name="text_type_inf">Тип информации:</string>
+    <string name="text_day_of_week">День недели</string>
+
+    <string-array name="type_of_information">
+        <item>Расписание</item>
+        <item>Сессия</item>
+        <item>Преподаватели</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>9:30 - 11:05</item>
+        <item>11:20 - 12:55</item>
+        <item>13:10 - 14:45</item>
+        <item>15:25 - 17:00</item>
+        <item>17:15 - 18:50</item>
+    </string-array>
+
+    <string-array name="day_of_week">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+    </string-array>
 </resources>

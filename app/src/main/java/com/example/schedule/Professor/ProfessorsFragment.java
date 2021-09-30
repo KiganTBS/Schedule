@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.schedule.R;
-import com.example.schedule.Scheule.ScheduleAdapter;
 
 import java.util.ArrayList;
 
@@ -36,10 +35,9 @@ public class ProfessorsFragment extends Fragment {
     }
 
     private void setInitData() {
-        professors.add(new Professor("Gay","Lord"));
-        professors.add(new Professor("Gay","Lord"));
-        professors.add(new Professor("Gay","Lord"));
-        professors.add(new Professor("Gay","Lord"));
-        professors.add(new Professor("Gay","Lord"));
+        professors.add(new Professor("Think","Lord","aboba"));
+        professors.add(new Professor("Системное программное обеспечение","Королькова Т.В.","(Лекция)"));
+        professors.add(new Professor("УиАИС","Беленькая М.Н.","(Лекция)"));
+
     }
 }

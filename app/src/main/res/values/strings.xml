@@ -15,5 +15,32 @@
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="text_log_out">   Log out</string>
+    <string name="text_name">Title:</string>
+    <string name="cab_dist">Cab/Dist</string>
+    <string name="time">Time:</string>
+    <string name="text_type_inf">Type of information:</string>
+    <string name="text_day_of_week">Day of week</string>
+
+    <string-array name="type_of_information">
+        <item>Schedule</item>
+        <item>Session</item>
+        <item>Professor</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>9:30 - 11:05</item>
+        <item>11:20 - 12:55</item>
+        <item>13:10 - 14:45</item>
+        <item>15:25 - 17:00</item>
+        <item>17:15 - 18:50</item>
+    </string-array>
+
+    <string-array name="day_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
 
 </resources>
