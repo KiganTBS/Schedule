@@ -35,7 +35,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     FirebaseFirestore db;
     private ScheduleAdapter adapter;
 
-    private String dayOfWeek="mon";
+    private String dayOfWeek="Понедельник";
 
     @Nullable
     @Override
@@ -84,7 +84,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        getData("mon");
+        getData(dayOfWeek);
    }
 
     @Override
@@ -98,13 +98,13 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.buttonMon:
                 buttonMon.setTextColor(getContext().getResources().getColor(R.color.teal_200));
-                getData("mon");
-                dayOfWeek = "mon";
+                getData("Понедельник");
+                dayOfWeek = "Понедельник";
                 break;
             case R.id.buttonTue:
                 buttonTue.setTextColor(getContext().getResources().getColor(R.color.teal_200));
-                getData("tue");
-                dayOfWeek = "tue";
+                getData("Вторник");
+                dayOfWeek = "Вторник";
                 break;
             case R.id.buttonWed:
                 buttonWed.setTextColor(getContext().getResources().getColor(R.color.teal_200));

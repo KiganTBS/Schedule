@@ -49,9 +49,9 @@ public class ChangeFragment extends Fragment {
                 if (task.isSuccessful()) {
                     data = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        data.add((String) document.get("nameLesson") +"\n" +document.get("typeLesson"));
+                        data.add((String) document.get("nameLesson") +"\n" +document.get("dayOfWeek")+"\n"+document.get("typeLesson"));
                         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data);
-                        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                        adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
                         spinner.setAdapter(adapter);
                     }
                 } else {
