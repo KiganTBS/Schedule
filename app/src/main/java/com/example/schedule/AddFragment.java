@@ -1,7 +1,6 @@
 package com.example.schedule;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import org.jetbrains.annotations.NotNull;
 
 public class AddFragment extends Fragment {
     private EditText editTextTitleAdd, editTextTitleAdd2, editTextTitleAdd3;
@@ -31,7 +24,7 @@ public class AddFragment extends Fragment {
     private Switch switchUpOrDown;
     private FloatingActionButton but;
     private Group group;
-    FirebaseFirestore firestore;
+    private FirebaseFirestore firestore;
 
     @Nullable
     @Override
@@ -41,7 +34,7 @@ public class AddFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
 
-        spinnerTypeOfInf = view.findViewById(R.id.spinnerTypeOfInf);
+        spinnerTypeOfInf = view.findViewById(R.id.spinnerTypeOfInfAdd);
         but = view.findViewById(R.id.floatingActionButton);
         group = (Group) view.findViewById(R.id.groupComponents);
         editTextTitleAdd = view.findViewById(R.id.editTextTitleAdd);

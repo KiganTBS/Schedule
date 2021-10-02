@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.schedule.Professor.ProfessorsFragment;
 import com.example.schedule.Schedule.ScheduleFragment;
@@ -30,13 +31,15 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Расписание");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
-       //  hideItem();
+
+        Intent intent = getIntent();
+        hideItem(intent.getStringExtra("rights"));
 
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -84,10 +87,14 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     //Скрыть item
-    public void hideItem(){
-        Menu menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_add).setVisible(false);
+    public void hideItem(String rights){
+        if(!rights.equals("admin")) {
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.nav_add).setVisible(false);
+            menu.findItem(R.id.nav_change).setVisible(false);
+        }
     }
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -95,7 +102,6 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else
             super.onBackPressed();
     }
-
 
     public void logOut(View view) {
         FirebaseAuth.getInstance().signOut();

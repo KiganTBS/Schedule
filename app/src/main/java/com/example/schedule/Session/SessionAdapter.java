@@ -13,21 +13,23 @@ import com.example.schedule.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHolder> {
-    private LayoutInflater inflater;
     private List<Session> sessions;
 
-    public SessionAdapter(Context context, List<Session> sessions) {
-        this.inflater = LayoutInflater.from(context);
+    public SessionAdapter() { this.sessions = new ArrayList<>();}
+
+    public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_session,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_session, parent, false);
         return new ViewHolder(view);
     }
 
@@ -37,7 +39,6 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHold
         holder.textViewDateExam.setText(session.getDateExam());
         holder.textViewTimeExam.setText(session.getTimeExam());
         holder.textViewProfessorExam.setText(session.getProfessorExam());
-
     }
 
     @Override

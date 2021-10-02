@@ -13,12 +13,12 @@
         android:layout_margin="8dp"
         android:text="@string/text_type_inf"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/spinnerTypeOfInf"
+        app:layout_constraintBottom_toTopOf="@id/spinnerTypeOfInfAdd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerTypeOfInf"
+        android:id="@+id/spinnerTypeOfInfAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -39,7 +39,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeOfInf" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeOfInfAdd" />
 
     <EditText
         android:id="@+id/editTextTitleAdd2"

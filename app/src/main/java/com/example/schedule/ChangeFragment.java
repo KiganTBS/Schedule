@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -21,13 +23,16 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 
 public class ChangeFragment extends Fragment {
-    FirebaseFirestore firestore;
-    Spinner spinner;
-    ArrayList<String> data;
-    ArrayAdapter<String> adapter;
+    private FirebaseFirestore firestore;
+    private Spinner spinnerName, spinnerTypeOfInfChange;
+    private androidx.constraintlayout.widget.Group group;
+    private ArrayList<String> data;
+    private ArrayAdapter<String> adapter;
+    private EditText editTextChange1, editTextChange2, editTextChange3;
 
     @Nullable
     @Override
@@ -35,24 +40,69 @@ public class ChangeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_change, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_change);
         firestore = FirebaseFirestore.getInstance();
-        spinner = view.findViewById(R.id.spinnerNameOfInf);
+        spinnerName = view.findViewById(R.id.spinnerNameOfInf);
+        spinnerTypeOfInfChange = view.findViewById(R.id.spinnerTypeOfInfChange);
+        group =  view.findViewById(R.id.groupChange);
 
+        editTextChange1 = view.findViewById(R.id.editTextChange);
+        editTextChange2 = view.findViewById(R.id.editTextChange2);
+        editTextChange3 = view.findViewById(R.id.editTextChange3);
+
+
+        spinnerTypeOfInfChange.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        editTextChange1.setText(R.string.tt);
+                        editTextChange2.setText(R.string.title_professors);
+                        editTextChange3.setText("Cab/Dis");
+                        group.setVisibility(View.VISIBLE);
+                        getListInf("schedule");
+                        break;
+                    case 1:
+                        editTextChange1.setText("Name exam");
+                        editTextChange2.setText("Time exam");
+                        editTextChange3.setText("Date exam");
+                        group.setVisibility(View.GONE);
+                        getListInf("session");
+                        break;
+                    case 2:
+                        editTextChange1.setText("Name of subject");
+                        editTextChange2.setText(R.string.title_professors);
+                        editTextChange3.setText("Type of subject");
+                        group.setVisibility(View.GONE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                group.setVisibility(View.VISIBLE);
+            }
+        });
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        firestore.collection("schedule").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    private void getListInf(String typeOfInf){
+
+        firestore.collection(typeOfInf).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     data = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        data.add((String) document.get("nameLesson") +"\n" +document.get("dayOfWeek")+"\n"+document.get("typeLesson"));
+                        switch (typeOfInf){
+                            case "schedule":
+                                data.add((String) document.get("nameLesson") +"\n" +document.get("dayOfWeek")+"\n"+document.get("typeLesson"));
+                                break;
+                            case "session":
+                                data.add((String) document.get("professorExam") +"\n" +document.get("timeExam")+"\n"+document.get("dateExam"));
+                                break;
+                        }
                         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data);
                         adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
-                        spinner.setAdapter(adapter);
+                        spinnerName.setAdapter(adapter);
                     }
                 } else {
                     Log.d("aboba", "Error getting documents: ", task.getException());

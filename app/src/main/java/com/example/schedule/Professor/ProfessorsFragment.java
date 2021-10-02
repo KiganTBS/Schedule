@@ -25,6 +25,8 @@ public class ProfessorsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_professors, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_professors);
 
+
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewProfessors);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ProfessorAdapter adapter = new ProfessorAdapter(getActivity(), professors);
