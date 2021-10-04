@@ -5,22 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.schedule.Schedule.ScheduleFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class LoginActivity extends AppCompatActivity {
-    EditText editTextEmail, editTextPass;
+public class SplashScreen extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
     private String userGroup = "null";
@@ -28,31 +22,21 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextPass = findViewById(R.id.editTextPass);
-        auth = FirebaseAuth.getInstance();
+
         firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
-    }
+        FirebaseUser user = auth.getInstance().getCurrentUser();
 
-    public void checkLogin(View view) {
-        String email = editTextEmail.getText().toString().trim();
-        String pass = editTextPass.getText().toString().trim();
+        if (user != null) {
+            getUserInfo();
+        } else{
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+        }
 
-        if (email.isEmpty() || pass.isEmpty()) return;
 
-        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    getUserInfo();
-                } else
-                    Toast.makeText(LoginActivity.this, R.string.toast_loginError, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void getUserInfo() {
@@ -69,11 +53,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private void startIntent(){
-       Intent intent = new Intent(LoginActivity.this, Main.class)
-       .putExtra("group", userGroup)
-       .putExtra("rights", userRights);
-       startActivity(intent);
+
+    private void startIntent() {
+        Intent intent = new Intent(this, Main.class)
+                .putExtra("group", userGroup)
+                .putExtra("rights", userRights);
+        startActivity(intent);
     }
 
     @Override
