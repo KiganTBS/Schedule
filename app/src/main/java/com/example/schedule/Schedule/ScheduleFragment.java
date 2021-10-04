@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.schedule.LoginActivity;
+import com.example.schedule.Main;
 import com.example.schedule.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,11 +38,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.List;
 
 public class ScheduleFragment extends Fragment implements View.OnClickListener {
-    ImageView imageViewDown, imageViewUp;
-    Button buttonMon, buttonTue, buttonWed, buttonThu, buttonFri;
-    Switch aSwitch;
-    List<Schedule> schedules;
-    FirebaseFirestore db;
+    private ImageView imageViewDown, imageViewUp;
+    private Button buttonMon, buttonTue, buttonWed, buttonThu, buttonFri;
+    private Switch aSwitch;
+    private List<Schedule> schedules;
+    private FirebaseFirestore db;
     private ScheduleAdapter adapter;
 
     private String dayOfWeek="Понедельник";
@@ -116,21 +118,32 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.buttonWed:
                 buttonWed.setTextColor(getContext().getResources().getColor(R.color.teal_200));
+                getData("Понедельник");
+                dayOfWeek = "Среда";
                 break;
             case R.id.buttonThu:
                 buttonThu.setTextColor(getContext().getResources().getColor(R.color.teal_200));
+                getData("Понедельник");
+                dayOfWeek = "Четверг";
                 break;
             case R.id.buttonFri:
                 buttonFri.setTextColor(getContext().getResources().getColor(R.color.teal_200));
+                getData("Понедельник");
+                dayOfWeek = "Пятница";
                 break;
         }
     }
 
     private void getData(String dayOfWeek){
-        db.collection("schedule")
+        Main activity = (Main) getActivity();
+        String sc = activity.getDataGroup();
+
+        db.collection("groups")
+                .document(sc)
+                .collection("Schedule")
                 .whereEqualTo("dayOfWeek", dayOfWeek)
                 .whereEqualTo("upOrDown",aSwitch.isChecked())
-                .orderBy("id", Query.Direction.ASCENDING)
+                .orderBy("number", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

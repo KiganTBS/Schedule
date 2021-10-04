@@ -1,69 +1,69 @@
 package com.example.schedule.Schedule;
 
 public class Schedule {
-    String timeBeginningLesson;
-    String timeEndLesson;
-    String nameLesson;
-    String typeLesson;
-    String typeOfPresence;
-    String nameProfessor;
+    String timeBegining;
+    String timeEnd;
+    String subject;
+    String type;
+    String format;
+    String lecturer;
 
-    public Schedule(String timeBeginningLesson, String timeEndLesson, String nameLesson, String typeLesson, String typeOfPresence, String nameProfessor) {
-        this.timeBeginningLesson = timeBeginningLesson;
-        this.timeEndLesson = timeEndLesson;
-        this.nameLesson = nameLesson;
-        this.typeLesson = typeLesson;
-        this.typeOfPresence = typeOfPresence;
-        this.nameProfessor = nameProfessor;
+    public Schedule(String timeBegining, String timeEnd, String subject, String type, String format, String lecturer) {
+        this.timeBegining = timeBegining;
+        this.timeEnd = timeEnd;
+        this.subject = subject;
+        this.type = type;
+        this.format = format;
+        this.lecturer = lecturer;
     }
 
     public Schedule() {}
 
-    public String getTimeBeginningLesson() {
-        return timeBeginningLesson;
+    public String getTimeBegining() {
+        return timeBegining;
     }
 
-    public void setTimeBeginningLesson(String timeBeginningLesson) {
-        this.timeBeginningLesson = timeBeginningLesson;
+    public void setTimeBegining(String timeBegining) {
+        this.timeBegining = timeBegining;
     }
 
-    public String getTimeEndLesson() {
-        return timeEndLesson;
+    public String getTimeEnd() {
+        return timeEnd;
     }
 
-    public void setTimeEndLesson(String timeEndLesson) {
-        this.timeEndLesson = timeEndLesson;
+    public void setTimeEnd(String timeEnd) {
+        this.timeEnd = timeEnd;
     }
 
-    public String getNameLesson() {
-        return nameLesson;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setNameLesson(String nameLesson) {
-        this.nameLesson = nameLesson;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public String getTypeLesson() {
-        return typeLesson;
+    public String getType() {
+        return type;
     }
 
-    public void setTypeLesson(String typeLesson) {
-        this.typeLesson = typeLesson;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getTypeOfPresence() {
-        return typeOfPresence;
+    public String getFormat() {
+        return format;
     }
 
-    public void setTypeOfPresence(String typeOfPresence) {
-        this.typeOfPresence = typeOfPresence;
+    public void setFormat(String format) {
+        this.format = format;
     }
 
-    public String getNameProfessor() {
-        return nameProfessor;
+    public String getLecturer() {
+        return lecturer;
     }
 
-    public void setNameProfessor(String nameProfessor) {
-        this.nameProfessor = nameProfessor;
+    public void setLecturer(String lecturer) {
+        this.lecturer = lecturer;
     }
 }

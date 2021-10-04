@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
+    private String r="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         Intent intent = getIntent();
         hideItem(intent.getStringExtra("rights"));
+        r = intent.getStringExtra("group");
+
 
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -102,6 +104,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else
             super.onBackPressed();
     }
+
+    public String getDataGroup(){return r;} //Не трогать тип доступа!!!!!!!!!!!(Передаю название группы, пока не понял, как всё настроить)
 
     public void logOut(View view) {
         FirebaseAuth.getInstance().signOut();

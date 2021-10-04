@@ -37,12 +37,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Schedule schedule = schedules.get(position);
-        holder.textViewTimeStart.setText(schedule.getTimeBeginningLesson());
-        holder.textViewTimeEnd.setText(schedule.getTimeEndLesson());
-        holder.textViewNameLesson.setText(schedule.getNameLesson());
-        holder.textViewTypeLesson.setText(schedule.getTypeLesson());
-        holder.textViewTypeOfPresence.setText(schedule.getTypeOfPresence());
-        holder.textViewNameProfessor.setText(schedule.getNameProfessor());
+        holder.textViewTimeStart.setText(schedule.getTimeBegining());
+        holder.textViewTimeEnd.setText(schedule.getTimeEnd());
+        holder.textViewNameLesson.setText(schedule.getSubject());
+        holder.textViewTypeLesson.setText(schedule.getType());
+        holder.textViewTypeOfPresence.setText(schedule.getFormat());
+        holder.textViewNameProfessor.setText(schedule.getLecturer());
     }
 
     @Override
