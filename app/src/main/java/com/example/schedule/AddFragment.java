@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,9 +19,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+
 public class AddFragment extends Fragment {
     private EditText editTextTitleAdd, editTextTitleAdd2, editTextTitleAdd3;
-    private Spinner spinnerTypeOfInf;
+    private Spinner spinnerTypeOfInf, spinnerDayOfWeek, spinnerTime;
     private Switch switchUpOrDown;
     private FloatingActionButton but;
     private Group group;
@@ -33,7 +36,8 @@ public class AddFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_add);
         firestore = FirebaseFirestore.getInstance();
 
-
+        spinnerDayOfWeek = view.findViewById(R.id.spinnerDayOfWeek);
+        spinnerTime = view.findViewById(R.id.spinnerTime);
         spinnerTypeOfInf = view.findViewById(R.id.spinnerTypeOfInfAdd);
         but = view.findViewById(R.id.floatingActionButton);
         group = (Group) view.findViewById(R.id.groupComponents);
@@ -49,6 +53,7 @@ public class AddFragment extends Fragment {
                     case 0:
                         group.setVisibility(View.VISIBLE);
                         editTextTitleAdd.setHint(R.string.text_name);
+
                         break;
                     case 1:
                         group.setVisibility(View.GONE);
@@ -63,14 +68,40 @@ public class AddFragment extends Fragment {
                         editTextTitleAdd3.setHint("Type of subject");
                         break;
                 }
-            }
 
+            }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 group.setVisibility(View.VISIBLE);
             }
         });
+
+        this.but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addData();
+            }
+        });
         return view;
+    }
+
+    private void addData(){
+        Bundle bundle = this.getArguments();
+        HashMap<String,Object> docMap = new HashMap();
+
+        docMap.put("subject",editTextTitleAdd.getText().toString().trim());
+        docMap.put("lecturer",editTextTitleAdd2.getText().toString().trim());
+        docMap.put("format",editTextTitleAdd3.getText().toString().trim());
+        docMap.put("dayOfWeek",spinnerDayOfWeek.getSelectedItem().toString().trim());
+        docMap.put("number",spinnerTime.getSelectedItemId()+1);
+        docMap.put("timeBegining",spinnerTime.getSelectedItem().toString().substring
+                (0,spinnerTime.getSelectedItem().toString().indexOf(" ")));
+        docMap.put("timeEnd",spinnerTime.getSelectedItem().toString().substring
+                (spinnerTime.getSelectedItem().toString().indexOf(" ")+3,spinnerTime.getSelectedItem().toString().length()));
+        docMap.put("type","aaaa");
+        docMap.put("upOrDown",switchUpOrDown.isChecked());
+
+        firestore.collection("groups").document(bundle.getString("group","")).collection("Schedule").add(docMap);
     }
 
 }

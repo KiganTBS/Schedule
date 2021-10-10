@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,14 +59,14 @@ public class ChangeFragment extends Fragment {
                         editTextChange2.setText(R.string.title_professors);
                         editTextChange3.setText("Cab/Dis");
                         group.setVisibility(View.VISIBLE);
-                        getListInf("schedule");
+                        getListInf("Schedule");
                         break;
                     case 1:
                         editTextChange1.setText("Name exam");
                         editTextChange2.setText("Time exam");
                         editTextChange3.setText("Date exam");
                         group.setVisibility(View.GONE);
-                        getListInf("session");
+                        getListInf("Session");
                         break;
                     case 2:
                         editTextChange1.setText("Name of subject");
@@ -85,19 +86,21 @@ public class ChangeFragment extends Fragment {
     }
 
     private void getListInf(String typeOfInf){
-
-        firestore.collection(typeOfInf).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Bundle bundle = this.getArguments();
+        Toast.makeText(getActivity(), bundle.getString("group","")+"\n"+typeOfInf, Toast.LENGTH_SHORT).show();
+        firestore.collection("groups").document(bundle.getString("group","")).collection(typeOfInf).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     data = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         switch (typeOfInf){
-                            case "schedule":
-                                data.add((String) document.get("nameLesson") +"\n" +document.get("dayOfWeek")+"\n"+document.get("typeLesson"));
+                            case "Schedule":
+                                data.add((String) document.get("subject") +"\n" +document.get("dayOfWeek")+"\n"+document.get("type"));
+                                Toast.makeText(getActivity(), "1:"+document.get("subject"), Toast.LENGTH_SHORT).show();
                                 break;
-                            case "session":
-                                data.add((String) document.get("professorExam") +"\n" +document.get("timeExam")+"\n"+document.get("dateExam"));
+                            case "Session":
+                                data.add((String) document.get("subject") +"\n" +document.get("timeExam")+"\n"+document.get("dateExam"));
                                 break;
                         }
                         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data);
