@@ -1,6 +1,6 @@
 package com.example.schedule.Session;
 
-import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,9 @@ import java.util.List;
 public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHolder> {
     private List<Session> sessions;
 
-    public SessionAdapter() { this.sessions = new ArrayList<>();}
+    public SessionAdapter() {
+        this.sessions = new ArrayList<>();
+    }
 
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
@@ -38,7 +40,13 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHold
         Session session = sessions.get(position);
         holder.textViewDateExam.setText(session.getDateExam());
         holder.textViewTimeExam.setText(session.getTimeExam());
-        holder.textViewProfessorExam.setText(session.getProfessorExam());
+        holder.textViewProfessorExam.setText(session.getSubject());
+        holder.textViewFormatExam.setText(session.getFormat());
+
+        if (session.getFormat().equals("Дистанционно"))
+            holder.textViewFormatExam.setTextColor(Color.parseColor("#77B577"));
+
+
     }
 
     @Override
@@ -46,13 +54,15 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHold
         return sessions.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textViewDateExam, textViewTimeExam, textViewProfessorExam;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView textViewDateExam, textViewTimeExam, textViewProfessorExam, textViewFormatExam;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewDateExam = itemView.findViewById(R.id.textViewDateExam);
             textViewTimeExam = itemView.findViewById(R.id.textViewTimeExam);
             textViewProfessorExam = itemView.findViewById(R.id.textViewProfessorExam);
+            textViewFormatExam = itemView.findViewById(R.id.textViewFormatExam);
         }
     }
 }

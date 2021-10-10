@@ -3,12 +3,13 @@ package com.example.schedule.Session;
 public class Session {
     String dateExam;
     String timeExam;
-    String professorExam;
+    String subject;
+    String format;
 
-    public Session(String dateExam, String timeExam, String professorExam) {
+    public Session(String dateExam, String timeExam, String professorExam, String format) {
         this.dateExam = dateExam;
         this.timeExam = timeExam;
-        this.professorExam = professorExam;
+        this.subject = professorExam;
     }
 
     public Session() {
@@ -18,23 +19,15 @@ public class Session {
         return dateExam;
     }
 
-    public void setDateExam(String dateExam) {
-        this.dateExam = dateExam;
-    }
-
     public String getTimeExam() {
         return timeExam;
     }
 
-    public void setTimeExam(String timeExam) {
-        this.timeExam = timeExam;
+    public String getSubject() {
+        return subject;
     }
 
-    public String getProfessorExam() {
-        return professorExam;
-    }
-
-    public void setProfessorExam(String professorExam) {
-        this.professorExam = professorExam;
+    public String getFormat() {
+        return format;
     }
 }

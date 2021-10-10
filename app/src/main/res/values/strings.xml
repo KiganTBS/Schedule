@@ -20,7 +20,7 @@
     <string name="time">Time:</string>
     <string name="text_type_inf">Type of information:</string>
     <string name="text_day_of_week">Day of week</string>
-    <string name="tt">Title</string>
+    <string name="tt" translatable="false">Title</string>
 
     <string-array name="type_of_information">
         <item>Schedule</item>

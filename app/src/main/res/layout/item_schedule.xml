@@ -71,7 +71,7 @@
             android:layout_margin="3dp"
             android:gravity="center"
             android:text="Дистанционно"
-            android:textColor="@color/lightgreen"
+            android:textColor="#3F51B5"
             app:layout_constraintBottom_toTopOf="@+id/textViewNameProfessor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline6"

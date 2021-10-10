@@ -45,12 +45,15 @@ public class SessionFragment extends Fragment {
     }
 
     private void setInitData(){
-        db.collection("session").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Bundle bundle = this.getArguments();
+        assert bundle != null;
+        db.collection("groups").document(bundle.getString("group","")).collection("Session").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(value !=null){
                     sessions = value.toObjects(Session.class);
                     adapter.setSessions(sessions);
+
                 }
             }
         });

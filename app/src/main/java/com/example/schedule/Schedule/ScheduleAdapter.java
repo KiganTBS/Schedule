@@ -1,5 +1,6 @@
 package com.example.schedule.Schedule;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         holder.textViewTimeEnd.setText(schedule.getTimeEnd());
         holder.textViewNameLesson.setText(schedule.getSubject());
         holder.textViewTypeLesson.setText(schedule.getType());
-        holder.textViewTypeOfPresence.setText(schedule.getFormat());
         holder.textViewNameProfessor.setText(schedule.getLecturer());
+        holder.textViewTypeOfPresence.setText(schedule.getFormat());
+
+        if (schedule.getFormat().equals("Дистанционно"))
+            holder.textViewTypeOfPresence.setTextColor(Color.parseColor("#77B577"));
+
     }
 
     @Override

@@ -51,8 +51,12 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         if (savedInstanceState == null) {
+            ScheduleFragment scheduleFragment = new ScheduleFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("group",r);
+            scheduleFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ScheduleFragment()).commit();
+                   scheduleFragment).commit();
             navigationView.setCheckedItem(R.id.nav_schedule);
         }
 
@@ -60,27 +64,39 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Bundle bundle = new Bundle();
+        bundle.putString("group",r);
         switch (item.getItemId()){
             case R.id.nav_schedule:
+                ScheduleFragment scheduleFragment = new ScheduleFragment();
+                scheduleFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ScheduleFragment()).commit();
+                        scheduleFragment).commit();
                 break;
             case R.id.nav_session:
+                SessionFragment sessionFragment = new SessionFragment();
+                sessionFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SessionFragment()).commit();
+                        sessionFragment).commit();
                 break;
             case R.id.nav_professor:
+                ProfessorsFragment professorsFragment = new ProfessorsFragment();
+                professorsFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfessorsFragment()).commit();
+                        professorsFragment).commit();
                 break;
             case R.id.nav_change:
+                ChangeFragment changeFragment = new ChangeFragment();
+                changeFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ChangeFragment()).commit();
+                        changeFragment).commit();
                 break;
             case R.id.nav_add:
+                AddFragment addFragment = new AddFragment();
+                addFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AddFragment()).commit();
+                        addFragment).commit();
                 break;
         }
 
@@ -104,8 +120,6 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else
             super.onBackPressed();
     }
-
-    public String getDataGroup(){return r;} //Не трогать тип доступа!!!!!!!!!!!(Передаю название группы, пока не понял, как всё настроить)
 
     public void logOut(View view) {
         FirebaseAuth.getInstance().signOut();

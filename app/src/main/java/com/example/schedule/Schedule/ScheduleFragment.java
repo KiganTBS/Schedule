@@ -92,12 +92,6 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getData(dayOfWeek);
-   }
-
-    @Override
     public void onClick(View v) {
         buttonMon.setTextColor(getContext().getResources().getColor(R.color.white));
         buttonTue.setTextColor(getContext().getResources().getColor(R.color.white));
@@ -118,28 +112,26 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.buttonWed:
                 buttonWed.setTextColor(getContext().getResources().getColor(R.color.teal_200));
-                getData("Понедельник");
+                getData("Среда");
                 dayOfWeek = "Среда";
                 break;
             case R.id.buttonThu:
                 buttonThu.setTextColor(getContext().getResources().getColor(R.color.teal_200));
-                getData("Понедельник");
+                getData("Четверг");
                 dayOfWeek = "Четверг";
                 break;
             case R.id.buttonFri:
                 buttonFri.setTextColor(getContext().getResources().getColor(R.color.teal_200));
-                getData("Понедельник");
+                getData("Пятница");
                 dayOfWeek = "Пятница";
                 break;
         }
     }
 
     private void getData(String dayOfWeek){
-        Main activity = (Main) getActivity();
-        String sc = activity.getDataGroup();
-
+        Bundle bundle = this.getArguments();
         db.collection("groups")
-                .document(sc)
+                .document(bundle.getString("group",""))
                 .collection("Schedule")
                 .whereEqualTo("dayOfWeek", dayOfWeek)
                 .whereEqualTo("upOrDown",aSwitch.isChecked())
