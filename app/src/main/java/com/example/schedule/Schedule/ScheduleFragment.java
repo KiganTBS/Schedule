@@ -45,7 +45,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
     private FirebaseFirestore db;
     private ScheduleAdapter adapter;
 
-    private String dayOfWeek="Понедельник";
+    private String dayOfWeek = "Понедельник";
 
     @Nullable
     @Override
@@ -74,7 +74,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new ScheduleAdapter();
         recyclerView.setAdapter(adapter);
-
+        getData(dayOfWeek);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -99,7 +99,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         buttonThu.setTextColor(getContext().getResources().getColor(R.color.white));
         buttonFri.setTextColor(getContext().getResources().getColor(R.color.white));
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.buttonMon:
                 buttonMon.setTextColor(getContext().getResources().getColor(R.color.teal_200));
                 getData("Понедельник");
@@ -128,22 +128,22 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void getData(String dayOfWeek){
+    private void getData(String dayOfWeek) {
         Bundle bundle = this.getArguments();
         db.collection("groups")
-                .document(bundle.getString("group",""))
+                .document(bundle.getString("group", ""))
                 .collection("Schedule")
                 .whereEqualTo("dayOfWeek", dayOfWeek)
-                .whereEqualTo("upOrDown",aSwitch.isChecked())
+                .whereEqualTo("upOrDown", aSwitch.isChecked())
                 .orderBy("number", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value !=null){
-                    schedules = value.toObjects(Schedule.class);
-                    adapter.setSchedules(schedules);
-                }
-            }
-        });
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (value != null) {
+                            schedules = value.toObjects(Schedule.class);
+                            adapter.setSchedules(schedules);
+                        }
+                    }
+                });
     }
 }

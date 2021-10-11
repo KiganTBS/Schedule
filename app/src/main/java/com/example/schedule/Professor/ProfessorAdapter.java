@@ -1,6 +1,5 @@
 package com.example.schedule.Professor;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,30 +10,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.schedule.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.ViewHolder> {
     List<Professor> professors;
-    private LayoutInflater inflater;
 
-    public ProfessorAdapter( Context context, List<Professor> professors) {
+    public ProfessorAdapter() { this.professors = new ArrayList<>(); }
+
+    public void setProfessors(List<Professor> professors) {
         this.professors = professors;
-        this.inflater = LayoutInflater.from(context);
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_professor,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_professor,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Professor professor = professors.get(position);
-        holder.textViewNameProfessor.setText(professor.getNameProfessor());
-        holder.textViewNameSubject.setText(professor.getNameSubject());
-        holder.textViewTypeOfSubject.setText(professor.getTypeOfSubject());
+        holder.textViewNameProfessor.setText(professor.getName());
+        holder.textViewNameSubject.setText(professor.getSubject());
+        holder.textViewTypeOfSubject.setText(professor.getSubjType());
     }
 
     @Override

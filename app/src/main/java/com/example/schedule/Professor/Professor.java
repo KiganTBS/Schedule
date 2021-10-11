@@ -1,37 +1,28 @@
 package com.example.schedule.Professor;
 
 public class Professor {
-    String nameProfessor;
-    String nameSubject;
-    String typeOfSubject;
+    String name;
+    String subject;
+    String subjType;
 
-    public Professor(String nameSubject,String nameProfessor,  String typeOfSubject) {
-        this.nameProfessor = nameProfessor;
-        this.nameSubject = nameSubject;
-        this.typeOfSubject = typeOfSubject;
+    public Professor(String subject, String name, String subjType) {
+        this.name = name;
+        this.subject = subject;
+        this.subjType = subjType;
     }
 
     public Professor() {
     }
 
 
-    public String getNameProfessor() {
-        return nameProfessor;
+    public String getName() {
+        return name;
     }
 
-    public void setNameProfessor(String nameProfessor) {
-        this.nameProfessor = nameProfessor;
+    public String getSubject() {
+        return subject;
     }
 
-    public String getNameSubject() {
-        return nameSubject;
-    }
+    public String getSubjType() { return subjType; }
 
-    public void setNameSubject(String nameSubject) {
-        this.nameSubject = nameSubject;
-    }
-
-    public String getTypeOfSubject() { return typeOfSubject; }
-
-    public void setTypeOfSubject(String typeOfSubject) { this.typeOfSubject = typeOfSubject; }
 }

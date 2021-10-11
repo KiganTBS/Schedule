@@ -30,7 +30,7 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHold
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_session, parent, false);
         return new ViewHolder(view);
     }
@@ -45,8 +45,6 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHold
 
         if (session.getFormat().equals("Дистанционно"))
             holder.textViewFormatExam.setTextColor(Color.parseColor("#77B577"));
-
-
     }
 
     @Override

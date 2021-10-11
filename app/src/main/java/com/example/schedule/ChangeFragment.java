@@ -43,7 +43,7 @@ public class ChangeFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
         spinnerName = view.findViewById(R.id.spinnerNameOfInf);
         spinnerTypeOfInfChange = view.findViewById(R.id.spinnerTypeOfInfChange);
-        group =  view.findViewById(R.id.groupChange);
+        group = view.findViewById(R.id.groupChange);
 
         editTextChange1 = view.findViewById(R.id.editTextChange);
         editTextChange2 = view.findViewById(R.id.editTextChange2);
@@ -53,7 +53,7 @@ public class ChangeFragment extends Fragment {
         spinnerTypeOfInfChange.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
+                switch (i) {
                     case 0:
                         editTextChange1.setText(R.string.tt);
                         editTextChange2.setText(R.string.title_professors);
@@ -73,6 +73,7 @@ public class ChangeFragment extends Fragment {
                         editTextChange2.setText(R.string.title_professors);
                         editTextChange3.setText("Type of subject");
                         group.setVisibility(View.GONE);
+                        getListInf("Lecturers");
                         break;
                 }
             }
@@ -85,30 +86,29 @@ public class ChangeFragment extends Fragment {
         return view;
     }
 
-    private void getListInf(String typeOfInf){
+    private void getListInf(String typeOfInf) {
         Bundle bundle = this.getArguments();
-        Toast.makeText(getActivity(), bundle.getString("group","")+"\n"+typeOfInf, Toast.LENGTH_SHORT).show();
-        firestore.collection("groups").document(bundle.getString("group","")).collection(typeOfInf).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection("groups").document(bundle.getString("group", "")).collection(typeOfInf).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     data = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        switch (typeOfInf){
+                        switch (typeOfInf) {
                             case "Schedule":
-                                data.add((String) document.get("subject") +"\n" +document.get("dayOfWeek")+"\n"+document.get("type"));
-                                Toast.makeText(getActivity(), "1:"+document.get("subject"), Toast.LENGTH_SHORT).show();
+                                data.add((String) document.get("subject") + "\n" + document.get("dayOfWeek") + "\n" + document.get("type"));
                                 break;
                             case "Session":
-                                data.add((String) document.get("subject") +"\n" +document.get("timeExam")+"\n"+document.get("dateExam"));
+                                data.add((String) document.get("subject") + "\n" + document.get("timeExam") + "\n" + document.get("dateExam"));
+                                break;
+                            case "Lecturers":
+                                data.add((String) document.get("name") + "\n" + document.get("subject") + "\n" + document.get("subjType"));
                                 break;
                         }
                         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data);
                         adapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
                         spinnerName.setAdapter(adapter);
                     }
-                } else {
-                    Log.d("aboba", "Error getting documents: ", task.getException());
                 }
             }
         });

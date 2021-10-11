@@ -44,4 +44,10 @@
         <item>Friday</item>
     </string-array>
 
+    <string-array name="type_of_schedule">
+        <item>Lecture</item>
+        <item>Practical</item>
+        <item>Laboratory</item>
+    </string-array>
+
 </resources>

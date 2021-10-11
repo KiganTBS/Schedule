@@ -35,4 +35,10 @@
         <item>Четверг</item>
         <item>Пятница</item>
     </string-array>
+
+    <string-array name="type_of_schedule">
+        <item>Лекция</item>
+        <item>Практическая</item>
+        <item>Лабораторная</item>
+    </string-array>
 </resources>
