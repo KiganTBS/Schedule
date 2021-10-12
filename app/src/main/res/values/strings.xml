@@ -49,5 +49,7 @@
         <item>Practical</item>
         <item>Laboratory</item>
     </string-array>
+    <string name="date">Date exam</string>
+    <string name="type_of_occupation">Type of occupation</string>
 
 </resources>

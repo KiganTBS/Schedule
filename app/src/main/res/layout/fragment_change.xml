@@ -117,9 +117,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="@string/text_name"
 
-        android:text="Title"
+        android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,8 +132,8 @@
         android:layout_margin="8dp"
 
         android:ems="10"
+        android:hint="@string/title_professors"
         android:inputType="textPersonName"
-        android:text="@string/title_professors"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,8 +146,8 @@
         android:layout_margin="8dp"
 
         android:ems="10"
+        android:hint="@string/cab_dist"
         android:inputType="textPersonName"
-        android:text="Cab/Dis"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
