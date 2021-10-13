@@ -13,6 +13,16 @@
         android:text="@string/time"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeOfScheduleChange" />
+
+    <TextView
+        android:id="@+id/textViewTypeOfScheduleChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Type Schedule"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextChange3" />
 
     <Spinner
@@ -24,6 +34,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTime2" />
+
+    <Spinner
+        android:id="@+id/spinnerTypeOfScheduleChange"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:entries="@array/type_of_schedule"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeOfScheduleChange" />
 
     <TextView
         android:id="@+id/textViewDayOfWeek2"
@@ -46,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewDayOfWeek2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/floatingActionButtonChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -153,6 +173,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextChange2" />
 
+    <EditText
+        android:id="@+id/editTextChange4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+
+        android:ems="10"
+        android:hint="@string/cab_dist"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextChange3" />
+
     <Spinner
         android:id="@+id/spinnerNameOfInf"
         android:layout_width="0dp"
@@ -176,7 +211,7 @@
         android:id="@+id/groupChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="switchUpOrDown2,textViewDown2,textViewUp2,textViewTime2,textViewDayOfWeek2,spinnerTime2,spinnerDayOfWeek2"
+        app:constraint_referenced_ids="switchUpOrDown2,textViewDown2,textViewUp2,textViewTime2,textViewDayOfWeek2,spinnerTime2,spinnerDayOfWeek2, spinnerTypeOfScheduleChange, textViewTypeOfScheduleChange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

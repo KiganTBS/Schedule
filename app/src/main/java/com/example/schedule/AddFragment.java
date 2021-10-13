@@ -40,9 +40,12 @@ public class AddFragment extends Fragment {
         spinnerDayOfWeek = view.findViewById(R.id.spinnerDayOfWeek);
         spinnerTime = view.findViewById(R.id.spinnerTime);
         spinnerTypeOfInf = view.findViewById(R.id.spinnerTypeOfInfAdd);
-        spinnerTypeOfSchedule = view.findViewById(R.id.spinnerTypeSchedule);
+        spinnerTypeOfSchedule = view.findViewById(R.id.spinnerTypeScheduleAdd);
+
         but = view.findViewById(R.id.floatingActionButton);
+
         group = (Group) view.findViewById(R.id.groupComponents);
+
         editTextTitleAdd = view.findViewById(R.id.editTextTitleAdd);
         editTextTitleAdd2 = view.findViewById(R.id.editTextTitleAdd2);
         editTextTitleAdd3 = view.findViewById(R.id.editTextTitleAdd3);
