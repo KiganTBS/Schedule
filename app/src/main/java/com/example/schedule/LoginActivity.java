@@ -21,16 +21,16 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPass;
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
-    private String userGroup = "null";
-    private String userRights = "user";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPass = findViewById(R.id.editTextPass);
+
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
@@ -59,15 +59,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     if (auth.getUid().equals(doc.get("UID"))) {
-                        userGroup = doc.get("group").toString();
-                        userRights = doc.get("rights").toString();
-                        startIntent();
+                        startIntent(doc.get("group").toString(),doc.get("rights").toString());
                     }
                 }
             }
         });
     }
-    private void startIntent(){
+    private void startIntent(String userGroup, String userRights){
        Intent intent = new Intent(LoginActivity.this, Main.class)
        .putExtra("group", userGroup)
        .putExtra("rights", userRights);

@@ -115,6 +115,7 @@ public class AddFragment extends Fragment {
                     firestore.collection("groups")
                             .document(bundle.getString("group", ""))
                             .collection(typeOfInf).add(docMap);
+
                     getFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, new AddFragment()).commit();
                     break;
@@ -128,6 +129,7 @@ public class AddFragment extends Fragment {
                     firestore.collection("groups")
                             .document(bundle.getString("group", ""))
                             .collection(typeOfInf).add(docMap);
+
                     getFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, new AddFragment()).commit();
                     break;
@@ -140,6 +142,7 @@ public class AddFragment extends Fragment {
                     firestore.collection("groups")
                             .document(bundle.getString("group", ""))
                             .collection(typeOfInf).add(docMap);
+
                     getFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, new AddFragment()).commit();
                     break;
@@ -149,11 +152,9 @@ public class AddFragment extends Fragment {
     }
 
     private boolean isField() {
-        if (editTextTitleAdd.getText().toString().isEmpty()
-                || editTextTitleAdd2.getText().toString().isEmpty()
-                || editTextTitleAdd3.getText().toString().isEmpty())
-            return false;
-        return true;
+        return !editTextTitleAdd.getText().toString().isEmpty()
+                && !editTextTitleAdd2.getText().toString().isEmpty()
+                && !editTextTitleAdd3.getText().toString().isEmpty();
     }
 
 }

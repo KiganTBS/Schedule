@@ -3,31 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/drawable/layout_bg.xml" value="0.3828125" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/drawable/splash_screen.xml" value="0.13240740740740742" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/fragment_add.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/fragment_change.xml" value="0.3663949275362319" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/fragment_schedule.xml" value="0.7877664504170528" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/fragment_session.xml" value="0.3546195652173913" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/item_professor.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/item_schedule.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/item_session.xml" value="0.7962598425196851" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/multiline_spinner_dropdown_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/multiline_spinner_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/drawable/buttonshape.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/drawable/splash_screen.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/activity_login.xml" value="0.322463768115942" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/fragment_professors.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/item_professor.xml" value="0.1" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/item_schedule.xml" value="0.1" />
+        <entry key="..\:/Users/kigan/AndroidStudioProjects/Schedule/app/src/main/res/layout/item_session.xml" value="0.33" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.3473731884057971" />
-      </ProjectState>
-    </option>
   </component>
 </project>

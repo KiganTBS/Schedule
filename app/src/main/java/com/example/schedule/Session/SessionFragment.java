@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,30 +33,40 @@ public class SessionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_session, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_session);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_session);
         db = FirebaseFirestore.getInstance();
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSession);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewSession);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new SessionAdapter();
         recyclerView.setAdapter(adapter);
 
         setInitData();
+
+        adapter.setOnSessionClickListener(new SessionAdapter.OnSessionClickListener() {
+            @Override
+            public void onSessionLongClick(int position) {
+                Toast.makeText(getContext(), "LongClick", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
-    private void setInitData(){
+    private void setInitData() {
         Bundle bundle = this.getArguments();
         assert bundle != null;
-        db.collection("groups").document(bundle.getString("group","")).collection("Session").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value !=null){
-                    sessions = value.toObjects(Session.class);
-                    adapter.setSessions(sessions);
+        db.collection("groups")
+                .document(bundle.getString("group", ""))
+                .collection("Session")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (value != null) {
+                            sessions = value.toObjects(Session.class);
+                            adapter.setSessions(sessions);
 
-                }
-            }
-        });
+                        }
+                    }
+                });
     }
 }

@@ -25,7 +25,8 @@ import org.jetbrains.annotations.NotNull;
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private String r="";
+    private String r = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +35,9 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Расписание");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-
 
         Intent intent = getIntent();
         hideItem(intent.getStringExtra("rights"));
@@ -50,15 +51,16 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        if (savedInstanceState == null) {
-            ScheduleFragment scheduleFragment = new ScheduleFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("group",r);
-            scheduleFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                   scheduleFragment).commit();
-            navigationView.setCheckedItem(R.id.nav_schedule);
-        }
+
+        ScheduleFragment scheduleFragment = new ScheduleFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("group", r);
+        bundle.putString("rights",intent.getStringExtra("rights"));
+        scheduleFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                scheduleFragment).commit();
+        navigationView.setCheckedItem(R.id.nav_schedule);
+
 
     }
 
@@ -66,8 +68,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Bundle bundle = new Bundle();
-        bundle.putString("group",r);
-        switch (item.getItemId()){
+        bundle.putString("group", r);
+        switch (item.getItemId()) {
             case R.id.nav_schedule:
                 ScheduleFragment scheduleFragment = new ScheduleFragment();
                 scheduleFragment.setArguments(bundle);
@@ -105,8 +107,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     //Скрыть item
-    public void hideItem(String rights){
-        if(!rights.equals("admin")) {
+    public void hideItem(String rights) {
+        if (!rights.equals("admin")) {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.nav_add).setVisible(false);
             menu.findItem(R.id.nav_change).setVisible(false);
@@ -123,7 +125,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
     public void logOut(View view) {
         FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }

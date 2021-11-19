@@ -17,10 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHolder> {
+
     private List<Session> sessions;
+    private OnSessionClickListener onSessionClickListener;
 
     public SessionAdapter() {
         this.sessions = new ArrayList<>();
+    }
+
+    interface OnSessionClickListener{
+        void onSessionLongClick(int position);
+    }
+
+    public void setOnSessionClickListener(OnSessionClickListener onSessionClickListener) {
+        this.onSessionClickListener = onSessionClickListener;
     }
 
     public void setSessions(List<Session> sessions) {
@@ -61,6 +71,15 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHold
             textViewTimeExam = itemView.findViewById(R.id.textViewTimeExam);
             textViewProfessorExam = itemView.findViewById(R.id.textViewProfessorExam);
             textViewFormatExam = itemView.findViewById(R.id.textViewFormatExam);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (onSessionClickListener!= null)
+                        onSessionClickListener.onSessionLongClick(getAdapterPosition());
+                    return true;
+                }
+            });
         }
     }
 }

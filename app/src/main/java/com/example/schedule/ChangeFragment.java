@@ -125,99 +125,67 @@ public class ChangeFragment extends Fragment {
     private void getListInf(String typeOfInf) {
         Bundle bundle = this.getArguments();
 
-        firestore.collection("groups").document(bundle.getString("group", "")).collection(typeOfInf).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    ArrayList<String> data = new ArrayList<>();
-                    dataMap = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        HashMap<String, Object> initData = new HashMap<>();
-                        switch (typeOfInf) {
-                            case "Schedule":
-                                data.add((String) document.get("subject")
-                                        + "\n" + document.get("dayOfWeek")
-                                        + "\n" + document.get("type")
-                                        + "\n" + upOrDown((Boolean) document.get("upOrDown")));
+        firestore.collection("groups")
+                .document(bundle.getString("group", ""))
+                .collection(typeOfInf).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
-                                initData.put("id", document.getId());
-                                initData.put("subject", document.get("subject"));
-                                initData.put("upOrDown", document.get("upOrDown"));
-                                initData.put("format", document.get("format"));
-                                initData.put("lecturer", document.get("lecturer"));
-                                initData.put("number", document.get("number"));
-                                initData.put("timeBegining", document.get("timeBegining"));
-                                initData.put("type", document.get("type"));
-                                initData.put("dayOfWeek", document.get("dayOfWeek"));
-                                dataMap.add(initData);
-                                break;
-                            case "Session":
-                                data.add((String) document.get("subject")
-                                        + "\n" + document.get("timeExam")
-                                        + "\n" + document.get("dateExam"));
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<String> data = new ArrayList<>();
+                            dataMap = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                HashMap<String, Object> initData = new HashMap<>();
+                                switch (typeOfInf) {
+                                    case "Schedule":
+                                        data.add((String) document.get("subject")
+                                                + "\n" + document.get("dayOfWeek")
+                                                + "\n" + document.get("type")
+                                                + "\n" + upOrDown((Boolean) document.get("upOrDown")));
 
-                                initData.put("id", document.getId());
-                                initData.put("dateExam", document.get("dateExam"));
-                                initData.put("format", document.get("format"));
-                                initData.put("subject", document.get("subject"));
-                                initData.put("timeExam", document.get("timeExam"));
-                                dataMap.add(initData);
-                                break;
-                            case "Lecturers":
-                                data.add((String) document.get("name")
-                                        + "\n" + document.get("subject")
-                                        + "\n" + document.get("subjType"));
+                                        initData.put("id", document.getId());
+                                        initData.put("subject", document.get("subject"));
+                                        initData.put("upOrDown", document.get("upOrDown"));
+                                        initData.put("format", document.get("format"));
+                                        initData.put("lecturer", document.get("lecturer"));
+                                        initData.put("number", document.get("number"));
+                                        initData.put("timeBegining", document.get("timeBegining"));
+                                        initData.put("type", document.get("type"));
+                                        initData.put("dayOfWeek", document.get("dayOfWeek"));
+                                        dataMap.add(initData);
+                                        break;
+                                    case "Session":
+                                        data.add((String) document.get("subject")
+                                                + "\n" + document.get("timeExam")
+                                                + "\n" + document.get("dateExam"));
 
-                                initData.put("id", document.getId());
-                                initData.put("name", document.get("name"));
-                                initData.put("subject", document.get("subject"));
-                                initData.put("subjType", document.get("subjType"));
-                                dataMap.add(initData);
-                                break;
+                                        initData.put("id", document.getId());
+                                        initData.put("dateExam", document.get("dateExam"));
+                                        initData.put("format", document.get("format"));
+                                        initData.put("subject", document.get("subject"));
+                                        initData.put("timeExam", document.get("timeExam"));
+                                        dataMap.add(initData);
+                                        break;
+                                    case "Lecturers":
+                                        data.add((String) document.get("name")
+                                                + "\n" + document.get("subject")
+                                                + "\n" + document.get("subjType"));
+
+                                        initData.put("id", document.getId());
+                                        initData.put("name", document.get("name"));
+                                        initData.put("subject", document.get("subject"));
+                                        initData.put("subjType", document.get("subjType"));
+                                        dataMap.add(initData);
+                                        break;
+                                }
+                                ArrayAdapter<String> adapterforListInf = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data);
+                                adapterforListInf.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
+                                spinnerName.setAdapter(adapterforListInf);
+                            }
                         }
-                        ArrayAdapter<String> adapterforListInf = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data);
-                        adapterforListInf.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
-                        spinnerName.setAdapter(adapterforListInf);
                     }
-                }
-            }
-        });
-    }
-
-    private void sendEditInfo() {
-        Bundle bundle = this.getArguments();
-
-        DocumentReference document = firestore.collection("groups").document(bundle.getString("group", ""))
-                .collection(typeOfInf(spinnerTypeOfInfChange.getSelectedItemPosition()))
-                .document(dataMap.get(spinnerName.getSelectedItemPosition()).get("id").toString());
-
-        switch (spinnerTypeOfInfChange.getSelectedItemPosition()) {
-            case 0:
-                document.update("subject",editTextChange1.getText().toString());
-                document.update("lecturer",editTextChange2.getText().toString());
-                document.update("format",editTextChange3.getText().toString());
-                document.update("type",spinnerTypeSchedule.getSelectedItem().toString());
-                document.update("timeBegining", spinnerTime.getSelectedItem().toString().substring(0, spinnerTime.getSelectedItem().toString().indexOf(" ")));
-                document.update("timeEnd", spinnerTime.getSelectedItem().toString().substring(spinnerTime.getSelectedItem().toString().indexOf(" ") + 3, spinnerTime.getSelectedItem().toString().length()));
-                document.update("dayOfWeek",spinnerDayOfWeek.getSelectedItem().toString());
-                document.update("number",spinnerTime.getSelectedItemPosition()+1);
-                document.update("upOrDown",switcUpOrDown.isChecked());
-
-                break;
-            case 1:
-                document.update("subject",editTextChange1.getText().toString());
-                document.update("timeExam",editTextChange2.getText().toString());
-                document.update("dateExam",editTextChange3.getText().toString());
-                document.update("format",editTextChange4.getText().toString());
-                break;
-            case 2:
-                document.update("name",editTextChange1.getText().toString());
-                document.update("subject",editTextChange2.getText().toString());
-                document.update("subjType",editTextChange3.getText().toString());
-
-                break;
-        }
-        Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void editInfo() {
@@ -253,6 +221,43 @@ public class ChangeFragment extends Fragment {
                 Toast.makeText(getActivity(), "i", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void sendEditInfo() {
+        Bundle bundle = this.getArguments();
+
+        DocumentReference document = firestore.collection("groups")
+                .document(bundle.getString("group", ""))
+                .collection(typeOfInf(spinnerTypeOfInfChange.getSelectedItemPosition()))
+                .document(dataMap.get(spinnerName.getSelectedItemPosition()).get("id").toString());
+
+        switch (spinnerTypeOfInfChange.getSelectedItemPosition()) {
+            case 0:
+                document.update("subject", editTextChange1.getText().toString());
+                document.update("lecturer", editTextChange2.getText().toString());
+                document.update("format", editTextChange3.getText().toString());
+                document.update("type", spinnerTypeSchedule.getSelectedItem().toString());
+                document.update("timeBegining", spinnerTime.getSelectedItem().toString().substring(0, spinnerTime.getSelectedItem().toString().indexOf(" ")));
+                document.update("timeEnd", spinnerTime.getSelectedItem().toString().substring(spinnerTime.getSelectedItem().toString().indexOf(" ") + 3, spinnerTime.getSelectedItem().toString().length()));
+                document.update("dayOfWeek", spinnerDayOfWeek.getSelectedItem().toString());
+                document.update("number", spinnerTime.getSelectedItemPosition() + 1);
+                document.update("upOrDown", switcUpOrDown.isChecked());
+
+                break;
+            case 1:
+                document.update("subject", editTextChange1.getText().toString());
+                document.update("timeExam", editTextChange2.getText().toString());
+                document.update("dateExam", editTextChange3.getText().toString());
+                document.update("format", editTextChange4.getText().toString());
+                break;
+            case 2:
+                document.update("name", editTextChange1.getText().toString());
+                document.update("subject", editTextChange2.getText().toString());
+                document.update("subjType", editTextChange3.getText().toString());
+
+                break;
+        }
+        Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
     }
 
     private String upOrDown(boolean typeOfWeek) {
@@ -302,20 +307,14 @@ public class ChangeFragment extends Fragment {
         }
     }
 
-    private String typeOfInf(int i){
-        switch (i){
-            case 1: return "Session";
-            case 2: return "Lecturers";
-            default: return "Schedule";
-        }
-    }
-
-    private int number(int i){
-        switch (i){
-            case 1: return 2;
-            case 2: return 3;
-            case 4: return 5;
-            default: return 1;
+    private String typeOfInf(int i) {
+        switch (i) {
+            case 1:
+                return "Session";
+            case 2:
+                return "Lecturers";
+            default:
+                return "Schedule";
         }
     }
 

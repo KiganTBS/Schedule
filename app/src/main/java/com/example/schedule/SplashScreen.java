@@ -17,8 +17,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class SplashScreen extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
-    private String userGroup = "null";
-    private String userRights = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +25,7 @@ public class SplashScreen extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        FirebaseUser user = auth.getInstance().getCurrentUser();
-
-        if (user == null) {
+        if (auth.getInstance().getCurrentUser() == null) {
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
         } else{
@@ -45,16 +41,14 @@ public class SplashScreen extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     if (auth.getUid().equals(doc.get("UID"))) {
-                        userGroup = doc.get("group").toString();
-                        userRights = doc.get("rights").toString();
-                        startIntent();
+                        startIntent(doc.get("group").toString(), doc.get("rights").toString());
                     }
                 }
             }
         });
     }
 
-    private void startIntent() {
+    private void startIntent(String userGroup, String userRights) {
         Intent intent = new Intent(this, Main.class)
                 .putExtra("group", userGroup)
                 .putExtra("rights", userRights);

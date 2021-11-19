@@ -3,6 +3,7 @@ package com.example.schedule.Schedule;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,13 +37,18 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleFragment extends Fragment implements View.OnClickListener {
     private ImageView imageViewDown, imageViewUp;
     private Button buttonMon, buttonTue, buttonWed, buttonThu, buttonFri;
     private Switch aSwitch;
+
+    Bundle bundle;
+
     private List<Schedule> schedules;
+
     private FirebaseFirestore db;
     private ScheduleAdapter adapter;
 
@@ -53,7 +60,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_schedule);
         db = FirebaseFirestore.getInstance();
-
+        bundle = this.getArguments();
         imageViewDown = view.findViewById(R.id.imageViewUp);
         imageViewUp = view.findViewById(R.id.imageViewDown);
         aSwitch = view.findViewById(R.id.switchUpDown);
@@ -70,10 +77,10 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         buttonThu.setOnClickListener(this::onClick);
         buttonFri.setOnClickListener(this::onClick);
 
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewSchedule);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new ScheduleAdapter();
-        recyclerView.setAdapter(adapter);
         getData(dayOfWeek);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -88,7 +95,18 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                 getData(dayOfWeek);
             }
         });
+        if (bundle.getString("rights", "").equals("admin")) {
+            adapter.setOnScheduleClickListener(new ScheduleAdapter.OnScheduleClickListener() {
+                @Override
+                public void onLongClick(int position) {
+                    dellDialog(schedules.get(position).getSubject(), position);
+                }
+            });
+        }
+        recyclerView.setAdapter(adapter);
+
         return view;
+
     }
 
     @Override
@@ -126,6 +144,7 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                 dayOfWeek = "Пятница";
                 break;
         }
+
     }
 
     private void getData(String dayOfWeek) {
@@ -139,11 +158,38 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        schedules = new ArrayList<>();
                         if (value != null) {
-                            schedules = value.toObjects(Schedule.class);
+                            for (QueryDocumentSnapshot s : value) {
+                                Schedule schedule = new Schedule(s.get("timeBegining").toString(), s.get("timeEnd").toString(), s.get("subject").toString(), s.get("type").toString(), s.get("format").toString(), s.get("lecturer").toString(), s.getId().toString());
+                                schedules.add(schedule);
+                            }
                             adapter.setSchedules(schedules);
                         }
                     }
                 });
+    }
+
+    private void dellDialog(String name, int position) {
+        Bundle bundle = this.getArguments();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Удалить заметку?\n " + name);
+        builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                db.collection("groups").document(bundle.getString("group")).collection("Schedule").document(schedules.get(position).getPathName()).delete();
+                Toast.makeText(getContext(), "Заметка успешно удалена " + schedules.get(position).getSubject(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        builder.setNeutralButton("Нет", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 }

@@ -18,9 +18,18 @@ import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
     private List<Schedule> schedules;
+    private OnScheduleClickListener onScheduleClickListener;
 
     public ScheduleAdapter() {
         this.schedules = new ArrayList<>();
+    }
+
+    interface OnScheduleClickListener{
+        void onLongClick(int position);
+    }
+
+    public void setOnScheduleClickListener(OnScheduleClickListener onScheduleClickListener) {
+        this.onScheduleClickListener = onScheduleClickListener;
     }
 
     public void setSchedules(List<Schedule> schedules) {
@@ -66,6 +75,16 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             textViewTypeLesson = itemView.findViewById(R.id.textViewTypeLesson);
             textViewTypeOfPresence = itemView.findViewById(R.id.textViewTypeOfPresence);
             textViewNameProfessor = itemView.findViewById(R.id.textViewNameProfessor);
+
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (onScheduleClickListener != null)
+                        onScheduleClickListener.onLongClick(getAdapterPosition());
+                    return true;
+                }
+            });
         }
     }
 }

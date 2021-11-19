@@ -32,7 +32,7 @@ public class ProfessorsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_professors, container, false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_professors);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_professors);
         db = FirebaseFirestore.getInstance();
 
 
@@ -48,14 +48,17 @@ public class ProfessorsFragment extends Fragment {
     private void setInitData() {
         Bundle bundle = this.getArguments();
         assert bundle != null;
-        db.collection("groups").document(bundle.getString("group","")).collection("Lecturers").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value !=null){
-                    professors = value.toObjects(Professor.class);
-                    adapter.setProfessors(professors);
-                }
-            }
-        });
+        db.collection("groups")
+                .document(bundle.getString("group", ""))
+                .collection("Lecturers")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (value != null) {
+                            professors = value.toObjects(Professor.class);
+                            adapter.setProfessors(professors);
+                        }
+                    }
+                });
     }
 }
