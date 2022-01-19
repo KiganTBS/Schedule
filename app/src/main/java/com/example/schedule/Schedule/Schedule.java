@@ -9,7 +9,15 @@ public class Schedule {
     String lecturer;
     String pathName;
 
-    public Schedule(String timeBegining, String timeEnd, String subject, String type, String format, String lecturer, String pathName) {
+    public Schedule(
+            String timeBegining,
+            String timeEnd,
+            String subject,
+            String type,
+            String format,
+            String lecturer,
+            String pathName)
+    {
         this.timeBegining = timeBegining;
         this.timeEnd = timeEnd;
         this.subject = subject;
@@ -46,5 +54,7 @@ public class Schedule {
         return lecturer;
     }
 
-    public String getPathName() { return pathName; }
+    public String getPathName() {
+        return pathName;
+    }
 }

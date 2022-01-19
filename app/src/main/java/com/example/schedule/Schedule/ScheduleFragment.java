@@ -1,11 +1,7 @@
 package com.example.schedule.Schedule;
 
-import static android.content.ContentValues.TAG;
-
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.schedule.LoginActivity;
-import com.example.schedule.Main;
 import com.example.schedule.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -56,7 +46,11 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_schedule);
         db = FirebaseFirestore.getInstance();
@@ -157,11 +151,21 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
                 .orderBy("number", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    public void onEvent(
+                            @Nullable QuerySnapshot value,
+                            @Nullable FirebaseFirestoreException error) {
                         schedules = new ArrayList<>();
                         if (value != null) {
                             for (QueryDocumentSnapshot s : value) {
-                                Schedule schedule = new Schedule(s.get("timeBegining").toString(), s.get("timeEnd").toString(), s.get("subject").toString(), s.get("type").toString(), s.get("format").toString(), s.get("lecturer").toString(), s.getId().toString());
+                                Schedule schedule = new Schedule(
+                                        s.get("timeBegining").toString(),
+                                        s.get("timeEnd").toString(),
+                                        s.get("subject").toString(),
+                                        s.get("type").toString(),
+                                        s.get("format").toString(),
+                                        s.get("lecturer").toString(),
+                                        s.getId().toString()
+                                );
                                 schedules.add(schedule);
                             }
                             adapter.setSchedules(schedules);
@@ -177,8 +181,12 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener {
         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                db.collection("groups").document(bundle.getString("group")).collection("Schedule").document(schedules.get(position).getPathName()).delete();
-                Toast.makeText(getContext(), "Заметка успешно удалена " + schedules.get(position).getSubject(), Toast.LENGTH_SHORT).show();
+                db
+                        .collection("groups")
+                        .document(bundle.getString("group"))
+                        .collection("Schedule")
+                        .document(schedules.get(position).getPathName()).delete();
+                Toast.makeText(getContext(), "Заметка успешно удалена " + name, Toast.LENGTH_SHORT).show();
             }
 
         });

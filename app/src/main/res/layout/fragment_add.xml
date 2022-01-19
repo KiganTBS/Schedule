@@ -108,7 +108,7 @@
         android:layout_margin="8dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
-        android:text="Type Schedule"
+        android:text="@string/tv_type_schedule"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTitleAdd3" />

@@ -5,11 +5,20 @@ public class Session {
     String timeExam;
     String subject;
     String format;
+    String pathName;
 
-    public Session(String dateExam, String timeExam, String professorExam, String format) {
+    public Session(
+            String dateExam,
+            String timeExam,
+            String professorExam,
+            String format,
+            String pathName)
+    {
         this.dateExam = dateExam;
         this.timeExam = timeExam;
         this.subject = professorExam;
+        this.format = format;
+        this.pathName = pathName;
     }
 
     public Session() {
@@ -29,5 +38,9 @@ public class Session {
 
     public String getFormat() {
         return format;
+    }
+
+    public String getPathName() {
+        return pathName;
     }
 }

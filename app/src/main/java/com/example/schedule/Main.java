@@ -1,5 +1,11 @@
 package com.example.schedule;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,25 +13,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.schedule.Professor.ProfessorsFragment;
 import com.example.schedule.Schedule.ScheduleFragment;
 import com.example.schedule.Session.SessionFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.jetbrains.annotations.NotNull;
 
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private String r = "";
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +35,11 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         getSupportActionBar().setTitle("Расписание");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
 
+        intent = getIntent();
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
-        Intent intent = getIntent();
+
         hideItem(intent.getStringExtra("rights"));
         r = intent.getStringExtra("group");
 
@@ -55,7 +55,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         ScheduleFragment scheduleFragment = new ScheduleFragment();
         Bundle bundle = new Bundle();
         bundle.putString("group", r);
-        bundle.putString("rights",intent.getStringExtra("rights"));
+        bundle.putString("rights", intent.getStringExtra("rights"));
         scheduleFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 scheduleFragment).commit();
@@ -69,6 +69,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Bundle bundle = new Bundle();
         bundle.putString("group", r);
+        bundle.putString("rights", intent.getStringExtra("rights"));
         switch (item.getItemId()) {
             case R.id.nav_schedule:
                 ScheduleFragment scheduleFragment = new ScheduleFragment();

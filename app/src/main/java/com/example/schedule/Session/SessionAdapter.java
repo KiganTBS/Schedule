@@ -53,8 +53,8 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionAdapter.ViewHold
         holder.textViewProfessorExam.setText(session.getSubject());
         holder.textViewFormatExam.setText(session.getFormat());
 
-        if (session.getFormat().equals("Дистанционно"))
-            holder.textViewFormatExam.setTextColor(Color.parseColor("#77B577"));
+       if (session.getFormat().equals("Дистанционно"))
+           holder.textViewFormatExam.setTextColor(Color.parseColor("#77B577"));
     }
 
     @Override

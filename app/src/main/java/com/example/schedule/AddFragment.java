@@ -65,18 +65,18 @@ public class AddFragment extends Fragment {
                     case 1:
                         group.setVisibility(View.GONE);
                         editTextTitleAdd4.setVisibility(View.VISIBLE);
-                        editTextTitleAdd.setHint("Name of ex");
-                        editTextTitleAdd2.setHint("Date");
-                        editTextTitleAdd3.setHint("Time");
-                        editTextTitleAdd4.setHint("Format");
+                        editTextTitleAdd.setHint(R.string.et_name_ex);
+                        editTextTitleAdd2.setHint(R.string.et_date_exam);
+                        editTextTitleAdd3.setHint(R.string.et_time_exam);
+                        editTextTitleAdd4.setHint(R.string.et_format_exam);
                         typeOfSubj = "Session";
                         break;
                     case 2:
                         group.setVisibility(View.GONE);
                         editTextTitleAdd4.setVisibility(View.GONE);
-                        editTextTitleAdd.setHint("Name professor");
-                        editTextTitleAdd2.setHint("Name subject");
-                        editTextTitleAdd3.setHint("Type of subject");
+                        editTextTitleAdd.setHint(R.string.et_name_prof);
+                        editTextTitleAdd2.setHint(R.string.et_name_subj);
+                        editTextTitleAdd3.setHint(R.string.et_type_subj);
                         typeOfSubj = "Lecturers";
                         break;
                 }

@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,13 +16,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.schedule.Schedule.ScheduleFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -44,7 +41,10 @@ public class ChangeFragment extends Fragment {
     private ArrayList<HashMap<String, Object>> dataMap;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_change, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_change);
 
@@ -179,8 +179,14 @@ public class ChangeFragment extends Fragment {
                                         dataMap.add(initData);
                                         break;
                                 }
-                                ArrayAdapter<String> adapterforListInf = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, data);
-                                adapterforListInf.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item);
+                                ArrayAdapter<String> adapterforListInf =
+                                        new ArrayAdapter<String>(
+                                                getActivity(),
+                                                android.R.layout.simple_spinner_item,
+                                                data);
+                                adapterforListInf
+                                        .setDropDownViewResource(
+                                                R.layout.multiline_spinner_dropdown_item);
                                 spinnerName.setAdapter(adapterforListInf);
                             }
                         }
@@ -197,9 +203,18 @@ public class ChangeFragment extends Fragment {
                         editTextChange1.setText(dataMap.get(i).get("subject").toString());
                         editTextChange2.setText(dataMap.get(i).get("lecturer").toString());
                         editTextChange3.setText(dataMap.get(i).get("format").toString());
-                        spinnerTypeSchedule.setSelection(typeSchedule(dataMap.get(i).get("type").toString()));
-                        spinnerTime.setSelection(time(dataMap.get(i).get("timeBegining").toString()));
-                        spinnerDayOfWeek.setSelection(dayOfWeek(dataMap.get(i).get("dayOfWeek").toString()));
+                        spinnerTypeSchedule.setSelection(
+                                typeSchedule(
+                                        dataMap.get(i).get("type").toString()
+                                ));
+                        spinnerTime.setSelection(
+                                time(
+                                        dataMap.get(i).get("timeBegining").toString()
+                                ));
+                        spinnerDayOfWeek.setSelection(
+                                dayOfWeek(
+                                        dataMap.get(i).get("dayOfWeek").toString()
+                                ));
                         switcUpOrDown.setChecked((Boolean) dataMap.get(i).get("upOrDown"));
                         break;
                     case 1:
@@ -237,8 +252,13 @@ public class ChangeFragment extends Fragment {
                 document.update("lecturer", editTextChange2.getText().toString());
                 document.update("format", editTextChange3.getText().toString());
                 document.update("type", spinnerTypeSchedule.getSelectedItem().toString());
-                document.update("timeBegining", spinnerTime.getSelectedItem().toString().substring(0, spinnerTime.getSelectedItem().toString().indexOf(" ")));
-                document.update("timeEnd", spinnerTime.getSelectedItem().toString().substring(spinnerTime.getSelectedItem().toString().indexOf(" ") + 3, spinnerTime.getSelectedItem().toString().length()));
+                document.update("timeBegining", spinnerTime.getSelectedItem().toString()
+                        .substring(0, spinnerTime
+                                .getSelectedItem().toString().indexOf(" ")));
+                document.update("timeEnd", spinnerTime.getSelectedItem().toString()
+                        .substring(spinnerTime
+                                        .getSelectedItem().toString().indexOf(" ") + 3,
+                                spinnerTime.getSelectedItem().toString().length()));
                 document.update("dayOfWeek", spinnerDayOfWeek.getSelectedItem().toString());
                 document.update("number", spinnerTime.getSelectedItemPosition() + 1);
                 document.update("upOrDown", switcUpOrDown.isChecked());

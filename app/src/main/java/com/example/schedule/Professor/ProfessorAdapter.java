@@ -14,9 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.ViewHolder> {
-    List<Professor> professors;
 
-    public ProfessorAdapter() { this.professors = new ArrayList<>(); }
+    private List<Professor> professors;
+    private OnProfessorClickListener onProfessorClickListener;
+
+    public ProfessorAdapter() {
+        this.professors = new ArrayList<>();
+    }
+
+    interface OnProfessorClickListener {
+        void onProfessorClickListener(int position);
+    }
+
+    public void setOnProfessorClickListener(OnProfessorClickListener onProfessorClickListener){
+        this.onProfessorClickListener = onProfessorClickListener;
+    }
 
     public void setProfessors(List<Professor> professors) {
         this.professors = professors;
@@ -26,7 +38,7 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_professor,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_professor, parent, false);
         return new ViewHolder(view);
     }
 
@@ -51,6 +63,15 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.View
             textViewNameProfessor = itemView.findViewById(R.id.textViewNameProfessor);
             textViewNameSubject = itemView.findViewById(R.id.textViewNameSubject);
             textViewTypeOfSubject = itemView.findViewById(R.id.textViewTypeOfSubject);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if(onProfessorClickListener!=null)
+                        onProfessorClickListener.onProfessorClickListener(getAdapterPosition());
+                    return true;
+                }
+            });
         }
     }
 }

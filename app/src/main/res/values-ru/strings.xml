@@ -4,7 +4,7 @@
     <string name="toast_loginError">EMAIL/PASSWORD НЕ НАЙДЕНЫ. ПОПРОБУЙТЕ СНОВА</string>
     <string name="title_schedule">Расписание</string>
     <string name="title_session">Сессия</string>
-    <string name="title_professors">Преподаватель</string>
+    <string name="title_professors">Преподаватели</string>
     <string name="title_change">Изменить</string>
     <string name="title_add">Добавить</string>
     <string name="text_log_out">Выйти</string>
@@ -13,6 +13,15 @@
     <string name="time">Время</string>
     <string name="text_type_inf">Тип информации:</string>
     <string name="text_day_of_week">День недели</string>
+    <string name="tv_change_select">Записи:</string>
+    <string name="tv_type_schedule">Тип пары</string>
+    <string name="et_name_ex">Название</string>
+    <string name="et_date_exam">Дата</string>
+    <string name="et_time_exam">Время</string>
+    <string name="et_format_exam">Формат(кабинет)</string>
+    <string name="et_name_prof">ФИО преподавателя</string>
+    <string name="et_name_subj">Название предмета</string>
+    <string name="et_type_subj">Формат предмета</string>
 
     <string-array name="type_of_information">
         <item>Расписание</item>
@@ -43,4 +52,5 @@
     </string-array>
     <string name="date">Дата</string>
     <string name="type_of_occupation">Тип занятия</string>
+
 </resources>

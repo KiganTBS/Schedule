@@ -21,6 +21,7 @@
     <string name="text_type_inf">Type of information:</string>
     <string name="text_day_of_week">Day of week</string>
     <string name="tt" translatable="false">Title</string>
+    <string name="tv_change_select">Note:</string>
 
     <string-array name="type_of_information">
         <item>Schedule</item>
@@ -51,5 +52,14 @@
     </string-array>
     <string name="date">Date exam</string>
     <string name="type_of_occupation">Type of occupation</string>
+    <string name="tv_type_schedule">Type Schedule</string>
+    <string name="et_name_ex">Name of exam</string>
+    <string name="et_date_exam">Date</string>
+    <string name="et_time_exam">Time</string>
+    <string name="et_format_exam">Format</string>
+    <string name="et_name_prof">Name professor</string>
+    <string name="et_name_subj">Name subject</string>
+    <string name="et_type_subj">Type of subject</string>
+
 
 </resources>
